@@ -38,8 +38,7 @@ namespace App1
             int hour = TimePicker.Time.Hours;
             int minute = TimePicker.Time.Minutes;
             DateTime selectedTime = new DateTime(year, month, day, hour, minute, 0);
-            DateTimeOffset selectedDate = new DateTimeOffset(selectedTime, TimeZoneInfo.Local.GetUtcOffset(selectedTime));
-            if (selectedDate < DateTimeOffset.Now)
+            if (selectedTime < DateTime.Now)
             {
                 MessageDialog dateDialog = new MessageDialog("Der gewählte Zeitpunkt liegt in der Vergangenheit", "Anderen Zeitpunkt wählen");
                 await dateDialog.ShowAsync();
@@ -52,7 +51,7 @@ namespace App1
             }
             else
             {
-                App.myDates.Add(new Date(Title.Text, selectedDate));
+                App.myDates.Add(new Date(Title.Text, selectedTime));
                 this.Frame.Navigate(typeof(MainPage));
                 DateSerializer.getInstance().write(App.myDates);
             }
@@ -75,7 +74,6 @@ namespace App1
 
         private void Outlook_Loaded(object sender, RoutedEventArgs e)
         {
-            
         }
     }
 }

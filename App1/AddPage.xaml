@@ -11,10 +11,10 @@
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="AdaptiveDesign"/>
         </VisualStateManager.VisualStateGroups>
-        <Pivot Title="Pivot">
+        <Pivot Title="Quelle auswählen" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True">
             <PivotItem x:Name="Own" Header="Eigener Termin">
                 <RelativePanel>
-                    <RelativePanel x:Name="InputPanel" HorizontalAlignment="Right" Margin="0,10" VerticalAlignment="Bottom" RelativePanel.AlignHorizontalCenterWithPanel="True" RenderTransformOrigin="0.5,0.5">
+                    <RelativePanel x:Name="InputPanel" HorizontalAlignment="Right" Margin="0,10" RelativePanel.AlignHorizontalCenterWithPanel="True" RenderTransformOrigin="0.5,0.5">
                         <RelativePanel.RenderTransform>
                             <CompositeTransform/>
                         </RelativePanel.RenderTransform>

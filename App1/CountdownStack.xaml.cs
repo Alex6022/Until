@@ -45,7 +45,7 @@ namespace App1
             {
                 FirstDateBlock.Text = Convert.ToString(diff.Days) + " D";
                 SecondDateBlock.Text = Convert.ToString(diff.Hours) + " H";
-                ThirdDateBlock.Text = Convert.ToString(diff.Minutes) + " M";
+                ThirdDateBlock.Text = Convert.ToString(diff.Minutes) + " M,  " + Convert.ToString(diff.Seconds) + " S";
             }
             else
             {
@@ -53,7 +53,7 @@ namespace App1
                 int days = diff.Days - 7 * weeks;
                 FirstDateBlock.Text = Convert.ToString(weeks) + " W";
                 SecondDateBlock.Text = Convert.ToString(days) + " D";
-                ThirdDateBlock.Text = Convert.ToString(diff.Hours) + " H";
+                ThirdDateBlock.Text = Convert.ToString(diff.Hours) + " H,  " + Convert.ToString(diff.Minutes) + " M,  " + Convert.ToString(diff.Seconds) + " S";
             }
         }
 

@@ -12,6 +12,8 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -137,7 +139,6 @@ namespace App1
         /// <param name="e">Details zur Anhalteanforderung.</param>
         private void OnSuspending(object sender, SuspendingEventArgs e)
         {
-            serializer.write(myDates);
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Anwendungszustand speichern und alle Hintergrundaktivitäten beenden
             deferral.Complete();

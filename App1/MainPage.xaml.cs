@@ -14,6 +14,7 @@ using System.Xml.Serialization;
 using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -33,10 +34,19 @@ namespace App1
     public sealed partial class MainPage : Page
     {
         DispatcherTimer dispatcherTimer = new DispatcherTimer();
+        Color barBColor;
+        Color inBarBColor;
 
         public MainPage()
         {
             this.InitializeComponent();
+            barBColor = Color.FromArgb(0, 67, 131, 255);
+            inBarBColor = Color.FromArgb(0, 67, 176, 255);
+            var view = ApplicationView.GetForCurrentView();
+            view.TitleBar.BackgroundColor = barBColor;
+            view.TitleBar.ButtonBackgroundColor = barBColor;
+            view.TitleBar.InactiveBackgroundColor = inBarBColor;
+            view.TitleBar.ButtonInactiveBackgroundColor = inBarBColor;
             ApplicationView.PreferredLaunchViewSize = new Size(400, 600);
             ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
             dispatcherTimer.Tick += dispatcherTimer_Tick;
@@ -74,18 +84,20 @@ namespace App1
     {
         public Date() { }
 
-        public Date(string name, DateTimeOffset release)
+        public Date(string name, DateTime release)
         {
             Title = name;
             FinalDate = release;
         }
 
+        /**
         public Date(string name, DateTimeOffset release, SolidColorBrush color)
         {
             Title = name;
             FinalDate = release;
             ColorCode = color;
         }
+            */
 
         public TimeSpan calculateCountdown()
         {
@@ -120,7 +132,6 @@ namespace App1
         }
     */
         public string Title { get; set; }
-        public DateTimeOffset FinalDate { get; set; }
-        public SolidColorBrush ColorCode { get; set; }
+        public DateTime FinalDate { get; set; }
     }
 }

@@ -17,7 +17,6 @@ namespace App1
     {
         public static DataContractSerializer serializer;
         private static Windows.Storage.StorageFolder roamingFolder;
-        private static StorageFile dateFile;
         public static DateSerializer instance = new DateSerializer();
         private string fileName;
 
@@ -31,30 +30,29 @@ namespace App1
             roamingFolder =
                   Windows.Storage.ApplicationData.Current.RoamingFolder;
             serializer = new DataContractSerializer(typeof(ObservableCollection<Date>));
-            fileName = "dateBase.xml";
-            createFile();
-        }
-
-
-        private async void createFile ()
-        {
-            dateFile = await roamingFolder.CreateFileAsync(fileName, CreationCollisionOption.OpenIfExists);
+            fileName = "db.xml";
         }
 
         public async void write(ObservableCollection<Date> dates)
         {
+            Debug.WriteLine("Schreibvorgang gestartet...");
+            StorageFile dateFile = await roamingFolder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
             Stream file = await dateFile.OpenStreamForWriteAsync();
             serializer.WriteObject(file, dates);
             file.Dispose();
+            Debug.WriteLine("...Schreibvorgang abgeschlossen!");
         }
 
         public async Task<ObservableCollection<Date>> read ()
         {
+            Debug.WriteLine("Lesevorgang gestartet...");
+            StorageFile dateFile = await roamingFolder.CreateFileAsync(fileName, CreationCollisionOption.OpenIfExists);
             Stream file = await dateFile.OpenStreamForReadAsync();
             Debug.WriteLine("Lesevorgang möglich: " + file.CanRead);
             XmlDictionaryReader reader = XmlDictionaryReader.CreateTextReader(file, new XmlDictionaryReaderQuotas());
             ObservableCollection<Date> date = (ObservableCollection<Date>)serializer.ReadObject(reader, false);
             file.Dispose();
+            Debug.WriteLine("...Lesevorgang abgeschlossen!");
             return date;
         }
 
