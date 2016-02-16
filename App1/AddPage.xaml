@@ -1,0 +1,27 @@
+﻿<Page
+    x:Class="App1.AddPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:App1"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" KeyDown="Page_KeyDown">
+
+    <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <RelativePanel x:Name="InputPanel" HorizontalAlignment="Right" Margin="0,10" VerticalAlignment="Bottom" RelativePanel.AlignHorizontalCenterWithPanel="True">
+            <RelativePanel x:Name="TitlePanel" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignHorizontalCenterWithPanel="True" Padding="2">
+                <TextBlock x:Name="TitleBlock" TextWrapping="Wrap" Text="Titel" Height="34" Width="45" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignHorizontalCenterWithPanel="True"/>
+                <TextBox x:Name="Title" TextWrapping="Wrap" Text="" HorizontalAlignment="Center" VerticalAlignment="Center" Height="34" Width="347" RelativePanel.Below="TitleBlock" Margin="0,5"/>
+            </RelativePanel>
+            <RelativePanel x:Name="DatePanel" HorizontalAlignment="Center" Margin="0,15,0,0" VerticalAlignment="Center" RelativePanel.Below="TitlePanel" Padding="2" RelativePanel.AlignHorizontalCenterWithPanel="True" Height="212">
+                <TextBlock x:Name="Date" TextWrapping="Wrap" Text="Datum" Height="34" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignHorizontalCenterWithPanel="True"/>
+                <DatePicker x:Name="DatePicker" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" RelativePanel.Below="Date" Margin="0,5,0,0" Width="344"/>
+                <RelativePanel x:Name="TimePanel" VerticalAlignment="Top" RelativePanel.Below="DatePicker" Padding="0,10,0,0" RelativePanel.AlignHorizontalCenterWithPanel="True" Width="{Binding Width, ElementName=DatePicker}">
+                    <TimePicker x:Name="TimePicker" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" RelativePanel.AlignHorizontalCenterWithPanel="True" Margin="0,0,5,0" Time="0" RelativePanel.AlignLeftWithPanel="True"/>
+                    <Button x:Name="currentTimeButton" Content="aktuell" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#33FFFFFF" RelativePanel.RightOf="TimePicker" RelativePanel.AlignLeftWith="" RelativePanel.AlignRightWith="" RelativePanel.AlignVerticalCenterWith="TimePicker" Margin="0" RelativePanel.AlignRightWithPanel="True" Click="currentTimeButton_Click"/>
+                </RelativePanel>
+            </RelativePanel>
+        </RelativePanel>
+        <Button x:Name="AddB" Content="Hinzufügen" HorizontalAlignment="Stretch" Margin="0.333,10,-0.667,10" VerticalAlignment="Top" RelativePanel.Below="" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignBottomWithPanel="True" Padding="8,4" Height="32" Click="AddB_Click"/>
+    </RelativePanel>
+</Page>

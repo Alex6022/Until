@@ -1,0 +1,23 @@
+﻿<UserControl
+    x:Class="App1.CountdownStack"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:App1"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignWidth="400" Height="220" Width="420">
+    <UserControl.Resources>
+        <x:Double x:Key="Stack_Height">NaN</x:Double>
+    </UserControl.Resources>
+
+    <StackPanel x:Name="Stack" Background="{StaticResource SystemControlBackgroundAccentBrush}" BorderBrush="White" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="400" Height="200" BorderThickness="0" RequestedTheme="Dark">
+        <TextBlock x:Name="TitleBlock" HorizontalAlignment="Center" Height="55" Margin="0,-5,0,0" TextWrapping="Wrap" Text="Titel" Width="400" VerticalAlignment="Top" FontSize="40" TextAlignment="Center" UseLayoutRounding="False" FontWeight="Bold" FontStyle="Italic" MaxLines="1"/>
+        <RelativePanel x:Name="DatePanel" BorderBrush="Gray" Height="150" BorderThickness="0,0,0,0">
+            <TextBlock x:Name="FirstDateBlock" HorizontalAlignment="Center" Margin="2,19,-2,-14" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Center" RelativePanel.AlignHorizontalCenterWithPanel="True" Width="400" Height="50" FontSize="32" TextAlignment="Center" RelativePanel.AlignTopWithPanel="True" FontFamily="Segoe UI Semilight"/>
+            <TextBlock x:Name="SecondDateBlock" HorizontalAlignment="Center" Margin="0,14,0,11" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Center" Width="400" Height="40" FontSize="29.333" TextAlignment="Center" RelativePanel.Below="FirstDateBlock" RelativePanel.Above="ThirdDateBlock" FontFamily="Segoe UI Light"/>
+            <TextBlock x:Name="ThirdDateBlock" HorizontalAlignment="Center" Margin="0,-7,0,7" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Center" Width="400" Height="30" FontSize="21.333" TextAlignment="Center" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignBottomWithPanel="True" Padding="0" FontFamily="Segoe UI Light"/>
+        </RelativePanel>
+        <FlipView x:Name="flipView"/>
+    </StackPanel>
+</UserControl>
