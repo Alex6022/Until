@@ -31,7 +31,7 @@ namespace App1
             roamingFolder =
                   Windows.Storage.ApplicationData.Current.RoamingFolder;
             serializer = new DataContractSerializer(typeof(ObservableCollection<Date>));
-            fileName = "Nochmal.xml";
+            fileName = "dateBase.xml";
             createFile();
         }
 

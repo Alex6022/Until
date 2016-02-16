@@ -19,7 +19,7 @@ namespace App1
 {
     public sealed partial class CountdownView : UserControl
     {
-        private CountdownStack lastTappedItem { get; }
+        private CountdownStack lastTappedItem;
 
         public CountdownView()
         {

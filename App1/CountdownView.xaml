@@ -12,12 +12,11 @@
         <MenuFlyout x:Name="gridFlyout" x:Key="gridFlyout">
             <MenuFlyoutItem x:Name="deleteButton" Text="löschen" Click="deleteButton_Click"/>
         </MenuFlyout>
-        <Storyboard x:Name="Storyboard1"/>
     </UserControl.Resources>
+    <FlyoutBase.AttachedFlyout>
+        <MenuFlyout/>
+    </FlyoutBase.AttachedFlyout>
 
     <GridView x:Name="gridView" CanReorderItems="True" HorizontalAlignment="Center" AllowDrop="True" ReorderMode="Enabled">
-        <FlyoutBase.AttachedFlyout>
-            <TimePickerFlyout/>
-        </FlyoutBase.AttachedFlyout>
     </GridView>
 </UserControl>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel.Appointments;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Popups;
@@ -70,6 +71,11 @@ namespace App1
             {
                 AddB_Click(sender, e);
             }
+        }
+
+        private void Outlook_Loaded(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

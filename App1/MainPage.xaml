@@ -17,6 +17,6 @@
     </Page.BottomAppBar>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <local:CountdownView x:Name="CountdownView" Loaded="CountdownView_Loaded" MinWidth="420" MinHeight="600"/>
+        <local:CountdownView x:Name="CountdownView" Loaded="CountdownView_Loaded" MinWidth="420" MinHeight="600" Margin="0,10,0,0"/>
     </Grid>
 </Page>

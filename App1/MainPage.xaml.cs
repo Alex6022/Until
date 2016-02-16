@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
+using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.ViewManagement;
@@ -79,6 +80,13 @@ namespace App1
             FinalDate = release;
         }
 
+        public Date(string name, DateTimeOffset release, SolidColorBrush color)
+        {
+            Title = name;
+            FinalDate = release;
+            ColorCode = color;
+        }
+
         public TimeSpan calculateCountdown()
         {
             TimeSpan countdown = FinalDate - DateTimeOffset.Now;
@@ -113,5 +121,6 @@ namespace App1
     */
         public string Title { get; set; }
         public DateTimeOffset FinalDate { get; set; }
+        public SolidColorBrush ColorCode { get; set; }
     }
 }
