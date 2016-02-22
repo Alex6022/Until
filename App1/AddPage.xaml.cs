@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -41,8 +42,16 @@ namespace App1
             DateTime selectedTime = new DateTime(year, month, day, hour, minute, 0);
             if (selectedTime < DateTime.Now)
             {
-                MessageDialog dateDialog = new MessageDialog("Der gewählte Zeitpunkt liegt in der Vergangenheit", "Anderen Zeitpunkt wählen");
-                await dateDialog.ShowAsync();
+                string messageText = "Der gewählte Zeitpunkt liegt in der Vergangenheit";
+                MessageDialog dateDialog = new MessageDialog(messageText, "Anderen Zeitpunkt wählen");
+                try
+                {
+                    await dateDialog.ShowAsync();
+                }
+                catch (Exception)
+                {
+                    Debug.WriteLine(messageText);
+                }
             }
             else if (String.IsNullOrWhiteSpace(Title.Text) == true)
             {

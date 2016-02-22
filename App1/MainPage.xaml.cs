@@ -36,6 +36,7 @@ namespace App1
     {
         DispatcherTimer countdownTimer = new DispatcherTimer();
 
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -45,6 +46,68 @@ namespace App1
             countdownTimer.Interval = new TimeSpan(0, 0, 1);
             countdownTimer.Start();
             CountdownView.PopulateCountdownFromCollection(App.myDates);
+            CountdownView.onPoint += CountdownView_onPoint;
+            CountdownView.outPoint += CountdownView_outPoint;
+            CountdownView.deletedStack += CountdownView_deletedStack;
+            CountdownView.PropertyChanged += CountdownView_PropertyChanged;
+            CreationDateChoser.IsChecked = true;
+        }
+
+        private void CountdownView_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName.Equals("lastTappedItem") && sender == null)
+            {
+                ClearMetaData();
+            }
+        }
+
+        private void CountdownView_deletedStack(object sender, CountdownView.DeletedEventArgs e)
+        {
+            if (e.isLastTapped == true)
+            {
+                ClearMetaData();
+            }
+        }
+
+        private void CountdownView_outPoint(object sender, PointerRoutedEventArgs e)
+        {
+            try
+            {
+                if (CountdownView.lastTappedItem == null)
+                {
+                    ClearMetaData();
+                }
+                else if (CountdownView.lastTappedItem != sender)
+                {
+                    CountdownStack stack = CountdownView.lastTappedItem;
+                    ShowMetaData(stack);
+                }
+            }
+            catch (Exception)
+            {
+                //DoNothing
+            }
+        }
+
+        private void CountdownView_onPoint(object sender, PointerRoutedEventArgs e)
+        {
+            Debug.Write(sender.ToString());
+            CountdownStack stack = (CountdownStack)sender;
+            ShowMetaData(stack);
+        }
+
+        private void ShowMetaData(CountdownStack stack)
+        {
+            BarBlock.Text = "Erstelldatum: " + stack.GetFormattedCreationDate();
+            FinalDateBlock.Text = "Eintrittsdatum: " + stack.GetFormattedFinalDate();
+            NameBlock.Text = "Event:\n" + stack.dateset.Title;
+        }
+
+        private void ClearMetaData()
+        {
+            BarBlock.Text = "";
+            FinalDateBlock.Text = "";
+            NameBlock.Text = "";
         }
 
         void countdownTimer_Tick(object sender, object e)
@@ -67,12 +130,39 @@ namespace App1
         private void TitleChoser_Click(object sender, RoutedEventArgs e)
         {
             App.ChosenSortAlgorithm = App.SortEnum.Title;
+            DateChoser.IsChecked = false;
+            CreationDateChoser.IsChecked = false;
             CountdownView.ReorderItems();
         }
 
         private void DateChoser_Click(object sender, RoutedEventArgs e)
         {
             App.ChosenSortAlgorithm = App.SortEnum.Date;
+            TitleChoser.IsChecked = false;
+            CreationDateChoser.IsChecked = false;
+            CountdownView.ReorderItems();
+        }
+
+        private void Order_Click(object sender, RoutedEventArgs e)
+        {
+            if (App.AscOrder == false)
+            {
+                App.AscOrder = true;
+                Order.Text = "Aufsteigend";
+            }
+            else
+            {
+                App.AscOrder = false;
+                Order.Text = "Absteigend";
+            }
+            CountdownView.ReorderItems();
+        }
+
+        private void CreationDateChoser_Click(object sender, RoutedEventArgs e)
+        {
+            App.ChosenSortAlgorithm = App.SortEnum.CreationDate;
+            TitleChoser.IsChecked = false;
+            DateChoser.IsChecked = false;
             CountdownView.ReorderItems();
         }
     }

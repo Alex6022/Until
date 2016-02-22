@@ -8,18 +8,28 @@
     mc:Ignorable="d">
     <Page.Resources>
         <MenuFlyout x:Key="SortFlyout">
-            <MenuFlyoutItem x:Name="TitleChoser" Text="Titel" Click="TitleChoser_Click"/>
-            <MenuFlyoutItem x:Name="DateChoser" Text="Datum" Click="DateChoser_Click"/>
+            <ToggleMenuFlyoutItem x:Name="CreationDateChoser" Text="Erstelldatum" Click="CreationDateChoser_Click"/>
+            <ToggleMenuFlyoutItem x:Name="DateChoser" Text="Datum" Click="DateChoser_Click"/>
+            <ToggleMenuFlyoutItem x:Name="TitleChoser" Text="Titel" Click="TitleChoser_Click"/>
+            <MenuFlyoutSeparator x:Name="Separator"/>
+            <MenuFlyoutItem x:Name="Order" Text="Aufsteigend" Click="Order_Click"/>
         </MenuFlyout>
+        <x:Double x:Key="CommandBarHeight">NaN</x:Double>
     </Page.Resources>
 
     <Page.BottomAppBar>
-        <CommandBar>
+        <CommandBar x:Name="BottomCommands" Height="{StaticResource CommandBarHeight}">
             <CommandBar.Content>
-                <Grid/>
+                <RelativePanel x:Name="BarPanel" Padding="2,2,2,2" Height="{Binding ElementName=BottomCommands, Path=ActualHeight}" Width="300" ToolTipService.ToolTip="Infobereich">
+                    <TextBlock x:Name="NameBlock" TextWrapping="Wrap" Height="{Binding ElementName=BottomCommands, Path=ActualHeight}" Text="" VerticalAlignment="Top" Width="100" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignTopWithPanel="True" TextAlignment="Center"/>
+                    <RelativePanel x:Name="MetaPanel" Height="{Binding ElementName=BottomCommands, Path=ActualHeight}" VerticalAlignment="Top" RelativePanel.RightOf="NameBlock" Margin="3,0,0,0">
+                        <TextBlock x:Name="BarBlock" Margin="0" RelativePanel.LeftOf="" Height="20" RelativePanel.AlignTopWithPanel="True" Text=""/>
+                        <TextBlock x:Name="FinalDateBlock" Margin="0" RelativePanel.Below="BarBlock" Height="20" RelativePanel.AlignLeftWith="BarBlock"/>
+                    </RelativePanel>
+                </RelativePanel>
             </CommandBar.Content>
             <AppBarButton x:Name="addButton" Label="Neu" Icon="Add" Click="addButton_Click"/>
-            <AppBarButton x:Name="appBarButton" HorizontalAlignment="Stretch" Icon="Sort" Label="appbarbutton" VerticalAlignment="Stretch" d:LayoutOverrides="Height" Flyout="{StaticResource SortFlyout}"/>
+            <AppBarButton x:Name="appBarButton" HorizontalAlignment="Stretch" Icon="Sort" Label="Sortieren" VerticalAlignment="Stretch" d:LayoutOverrides="Height" Flyout="{StaticResource SortFlyout}"/>
         </CommandBar>
     </Page.BottomAppBar>
 

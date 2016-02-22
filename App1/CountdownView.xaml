@@ -17,5 +17,5 @@
         <MenuFlyout/>
     </FlyoutBase.AttachedFlyout>
 
-    <GridView x:Name="gridView" HorizontalAlignment="Center" AllowDrop="True" ReorderMode="Enabled" CanReorderItems="True"/>
+    <GridView x:Name="gridView" IsHitTestVisible="True" HorizontalAlignment="Center" AllowDrop="True" ReorderMode="Enabled" CanReorderItems="True" FlyoutBase.AttachedFlyout="{StaticResource EditFlyout}" Tapped="gridView_Tapped"/>
 </UserControl>

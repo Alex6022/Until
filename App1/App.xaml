@@ -6,6 +6,11 @@
     RequestedTheme="Dark">
     <Application.Resources>
         <SolidColorBrush x:Key="CustomStackBrush" Color="{ThemeResource SystemAccentColor}"/>
+        <Flyout x:Key="EditFlyout">
+            <Grid Height="100" Width="100">
+                <local:CountdownStack HorizontalAlignment="Left" Margin="0,0,-320,-120" VerticalAlignment="Top"/>
+            </Grid>
+        </Flyout>
     </Application.Resources>
 
 </Application>

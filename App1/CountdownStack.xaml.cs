@@ -66,6 +66,28 @@ namespace App1
             }
         }
 
+        public string GetFormattedCreationDate ()
+        {
+            string formatted;
+            DateTime cDate = dateset.CreationDate;
+            formatted = formatDate(cDate);
+            return formatted;
+        }
+
+        public string GetFormattedFinalDate ()
+        {
+            string formatted;
+            DateTime fDate = dateset.FinalDate;
+            formatted = formatDate(fDate);
+            return formatted;
+        }
+
+        private string formatDate (DateTime date)
+        {
+            string formattedDate = date.Day + "." + date.Month + "." + date.Year;
+            return formattedDate;
+        }
+
         public void RefreshCountdown()
         {
             TimeSpan difference = final - DateTimeOffset.Now;

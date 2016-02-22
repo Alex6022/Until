@@ -35,8 +35,9 @@ namespace App1
         public static Windows.Storage.IStorageFile datesFile;
         Color barBColor;
         Color inBarBColor;
-        public enum SortEnum { Date, Title};
+        public enum SortEnum { CreationDate, Date, Title};
         public static SortEnum ChosenSortAlgorithm;
+        public static bool AscOrder = true;
 
         /// <summary>
         /// Initialisiert das Singletonanwendungsobjekt.  Dies ist die erste Zeile von erstelltem Code
@@ -54,6 +55,7 @@ namespace App1
             RestoreDatebase();
             ChosenSortAlgorithm = SortEnum.Date;
         }
+
 
         private async void RestoreDatebase()
         {
