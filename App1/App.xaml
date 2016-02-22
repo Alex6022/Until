@@ -4,5 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:App1"
     RequestedTheme="Dark">
+    <Application.Resources>
+        <SolidColorBrush x:Key="CustomStackBrush" Color="{ThemeResource SystemAccentColor}"/>
+    </Application.Resources>
 
 </Application>

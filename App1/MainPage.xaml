@@ -6,6 +6,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+    <Page.Resources>
+        <MenuFlyout x:Key="SortFlyout">
+            <MenuFlyoutItem x:Name="TitleChoser" Text="Titel" Click="TitleChoser_Click"/>
+            <MenuFlyoutItem x:Name="DateChoser" Text="Datum" Click="DateChoser_Click"/>
+        </MenuFlyout>
+    </Page.Resources>
 
     <Page.BottomAppBar>
         <CommandBar>
@@ -13,10 +19,17 @@
                 <Grid/>
             </CommandBar.Content>
             <AppBarButton x:Name="addButton" Label="Neu" Icon="Add" Click="addButton_Click"/>
+            <AppBarButton x:Name="appBarButton" HorizontalAlignment="Stretch" Icon="Sort" Label="appbarbutton" VerticalAlignment="Stretch" d:LayoutOverrides="Height" Flyout="{StaticResource SortFlyout}"/>
         </CommandBar>
     </Page.BottomAppBar>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <local:CountdownView x:Name="CountdownView" Loaded="CountdownView_Loaded" MinWidth="420" MinHeight="600" Margin="0,10,0,0"/>
-    </Grid>
+    <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <local:CountdownView x:Name="CountdownView" Loaded="CountdownView_Loaded" MinWidth="420" MinHeight="600" Margin="0,10,0,0" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignTopWithPanel="True">
+            <local:CountdownView.Transitions>
+                <TransitionCollection>
+                    <ReorderThemeTransition/>
+                </TransitionCollection>
+            </local:CountdownView.Transitions>
+        </local:CountdownView>
+    </RelativePanel>
 </Page>

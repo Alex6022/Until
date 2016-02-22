@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -33,43 +34,27 @@ namespace App1
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        DispatcherTimer dispatcherTimer = new DispatcherTimer();
-        Color barBColor;
-        Color inBarBColor;
+        DispatcherTimer countdownTimer = new DispatcherTimer();
 
         public MainPage()
         {
             this.InitializeComponent();
-            barBColor = Color.FromArgb(0, 67, 131, 255);
-            inBarBColor = Color.FromArgb(0, 67, 176, 255);
-            var view = ApplicationView.GetForCurrentView();
-            view.TitleBar.BackgroundColor = barBColor;
-            view.TitleBar.ButtonBackgroundColor = barBColor;
-            view.TitleBar.InactiveBackgroundColor = inBarBColor;
-            view.TitleBar.ButtonInactiveBackgroundColor = inBarBColor;
             ApplicationView.PreferredLaunchViewSize = new Size(400, 600);
             ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
-            dispatcherTimer.Tick += dispatcherTimer_Tick;
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
-            dispatcherTimer.Start();
-            try
-            {
-                foreach (Date date in App.myDates)
-                {
-                    CountdownView.addCountdown(date);
-                }
-            }
-            catch (Exception) { }
+            countdownTimer.Tick += countdownTimer_Tick;
+            countdownTimer.Interval = new TimeSpan(0, 0, 1);
+            countdownTimer.Start();
+            CountdownView.PopulateCountdownFromCollection(App.myDates);
         }
 
-        void dispatcherTimer_Tick(object sender, object e)
+        void countdownTimer_Tick(object sender, object e)
         {
             CountdownView.RefreshCountdowns();
         }
 
         private void addButton_Click(object sender, RoutedEventArgs e)
         {
-            dispatcherTimer.Start();
+            countdownTimer.Start();
             CountdownView.Clear();
             this.Frame.Navigate(typeof(AddPage));
         }
@@ -78,60 +63,49 @@ namespace App1
         {
 
         }
+
+        private void TitleChoser_Click(object sender, RoutedEventArgs e)
+        {
+            App.ChosenSortAlgorithm = App.SortEnum.Title;
+            CountdownView.ReorderItems();
+        }
+
+        private void DateChoser_Click(object sender, RoutedEventArgs e)
+        {
+            App.ChosenSortAlgorithm = App.SortEnum.Date;
+            CountdownView.ReorderItems();
+        }
     }
 
-    public class Date // : IXmlSerializable
+    public class Date
     {
+        public string Title { get; set; }
+        public DateTime FinalDate { get; set; }
+        public Color ColorCode { get; set; }
+        public DateTime CreationDate { get; set; }
+
         public Date() { }
 
         public Date(string name, DateTime release)
         {
             Title = name;
             FinalDate = release;
+            ColorCode = Color.FromArgb(0, 255, 0, 0);
+            CreationDate = DateTime.Now;
         }
 
-        /**
-        public Date(string name, DateTimeOffset release, SolidColorBrush color)
+        public Date(string name, DateTime release, Color color)
         {
             Title = name;
             FinalDate = release;
             ColorCode = color;
+            CreationDate = DateTime.Now;
         }
-            */
 
         public TimeSpan calculateCountdown()
         {
             TimeSpan countdown = FinalDate - DateTimeOffset.Now;
             return countdown;
         }
-
-        public XmlSchema GetSchema()
-        {
-            return null;
-        }
-
-        /**
-        public void ReadXml(XmlReader reader)
-        {
-            reader.MoveToContent();
-            Title = reader.GetAttribute("SavedTitle");
-            Boolean isEmptyElement = reader.IsEmptyElement; // (1)
-            reader.ReadStartElement();
-            if (!isEmptyElement) // (1)
-            {
-                FinalDate = DateTimeOffset.ParseExact(reader.
-                    ReadElementContentAsString(), "yyyy-MM-dd", null);
-                reader.ReadEndElement();
-            }
-        }
-
-        public void WriteXml(XmlWriter writer)
-        {
-            writer.WriteAttributeString("SavedTitle", Title);
-            writer.WriteElementString("SavedDate", XmlConvert.ToString(FinalDate));
-        }
-    */
-        public string Title { get; set; }
-        public DateTime FinalDate { get; set; }
     }
 }

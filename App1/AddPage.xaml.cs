@@ -27,6 +27,7 @@ namespace App1
         public AddPage()
         {
             this.InitializeComponent();
+            Title.Focus(FocusState.Programmatic);
             DatePicker.MinYear = System.DateTimeOffset.Now;
         }
 

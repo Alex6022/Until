@@ -10,13 +10,12 @@
     d:DesignWidth="400">
     <UserControl.Resources>
         <MenuFlyout x:Name="gridFlyout" x:Key="gridFlyout">
-            <MenuFlyoutItem x:Name="deleteButton" Text="löschen" Click="deleteButton_Click"/>
+            <MenuFlyoutItem x:Name="deleteButton" Text="Löschen" Click="deleteButton_Click"/>
         </MenuFlyout>
     </UserControl.Resources>
     <FlyoutBase.AttachedFlyout>
         <MenuFlyout/>
     </FlyoutBase.AttachedFlyout>
 
-    <GridView x:Name="gridView" CanReorderItems="True" HorizontalAlignment="Center" AllowDrop="True" ReorderMode="Enabled">
-    </GridView>
+    <GridView x:Name="gridView" HorizontalAlignment="Center" AllowDrop="True" ReorderMode="Enabled" CanReorderItems="True"/>
 </UserControl>

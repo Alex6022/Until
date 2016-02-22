@@ -13,6 +13,7 @@ using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
+using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -32,6 +33,10 @@ namespace App1
         public static ObservableCollection<Date> myDates;
         private DateSerializer serializer;
         public static Windows.Storage.IStorageFile datesFile;
+        Color barBColor;
+        Color inBarBColor;
+        public enum SortEnum { Date, Title};
+        public static SortEnum ChosenSortAlgorithm;
 
         /// <summary>
         /// Initialisiert das Singletonanwendungsobjekt.  Dies ist die erste Zeile von erstelltem Code
@@ -47,6 +52,7 @@ namespace App1
             this.Suspending += OnSuspending;
             serializer = DateSerializer.getInstance();
             RestoreDatebase();
+            ChosenSortAlgorithm = SortEnum.Date;
         }
 
         private async void RestoreDatebase()
@@ -90,6 +96,13 @@ namespace App1
 #endif
 
             Frame rootFrame = Window.Current.Content as Frame;
+            barBColor = Color.FromArgb(0, 67, 131, 255);
+            inBarBColor = Color.FromArgb(0, 67, 176, 255);
+            var view = ApplicationView.GetForCurrentView();
+            view.TitleBar.BackgroundColor = barBColor;
+            view.TitleBar.ButtonBackgroundColor = barBColor;
+            view.TitleBar.InactiveBackgroundColor = inBarBColor;
+            view.TitleBar.ButtonInactiveBackgroundColor = inBarBColor;
 
             // App-Initialisierung nicht wiederholen, wenn das Fenster bereits Inhalte enthält.
             // Nur sicherstellen, dass das Fenster aktiv ist.

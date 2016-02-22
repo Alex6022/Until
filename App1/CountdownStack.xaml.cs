@@ -1,6 +1,8 @@
 ﻿using System;
+using Windows.UI;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -26,11 +28,18 @@ namespace App1
         public CountdownStack(Date date)
         {
             this.InitializeComponent();
+            //Stack.Background = new SolidColorBrush(Color.FromArgb(0, 255, 0, 0));
             TitleBlock.Text = date.Title;
             final = date.FinalDate;
             TimeSpan difference = date.FinalDate - DateTimeOffset.Now;
             fillDateBeautiful(difference);
             dateset = date;
+        }
+
+        public void SetColor(Color color)
+        {
+            SolidColorBrush brush = new SolidColorBrush(color);
+            Stack.Background = brush;
         }
 
         private void fillDateBeautiful(TimeSpan diff)
